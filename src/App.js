@@ -3,7 +3,7 @@ import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { MeshStandardMaterial } from 'three';
 import { FaFlag, FaFont, FaTrashAlt, FaExclamationTriangle, FaSatelliteDish, FaArrowsAlt, FaArrowUp, FaArrowDown, FaArrowLeft, FaArrowRight, FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
-import { AppBar, Toolbar, Typography, Tooltip, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Typography, Tooltip } from "@mui/material";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import RC from './assets/img/RC.png';
 import LC from './assets/img/LC.png';
