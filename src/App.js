@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { MeshStandardMaterial } from 'three';
-import { FaFlag, FaFont, FaTrashAlt, FaExclamationTriangle, FaSatelliteDish, FaArrowsAlt, FaArrowUp, FaArrowDown, FaArrowLeft, FaArrowRight, FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
+import { FaCode, FaFlag, FaFont, FaTrashAlt, FaExclamationTriangle, FaSatelliteDish, FaArrowsAlt, FaArrowUp, FaArrowDown, FaArrowLeft, FaArrowRight, FaArrowCircleUp, FaArrowCircleDown } from "react-icons/fa";
 import { AppBar, Toolbar, Typography, Tooltip } from "@mui/material";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import RC from './assets/img/RC.png';
@@ -421,6 +421,32 @@ export default function App() {
     terminar_posicionamiento()
   }
 
+  const handleJsonClick = () => {
+    guardarJSONConSelector(flags)
+  }
+
+  async function guardarJSONConSelector(data) {
+    try {
+        const options = {
+            types: [{
+                description: "Archivo JSON",
+                accept: { "application/json": [".json"] },
+            }],
+            suggestedName: "archivo.json"
+        };
+
+        const handle = await window.showSaveFilePicker(options);
+        const writable = await handle.createWritable();
+
+        await writable.write(JSON.stringify(data, null, 2));
+        await writable.close();
+
+        console.log("Archivo guardado correctamente.");
+    } catch (error) {
+        console.error("Error al guardar el archivo:", error);
+    }
+  }
+
   return (
     <div style={{ height: "100vh", width: "100vw", position: "relative", display: "flex", flexDirection: "column" }}>
       
@@ -521,6 +547,29 @@ export default function App() {
               style={{ background: "none", border: "none", cursor: "pointer", color: "white", fontSize: "24px", marginTop: "15px" }}
             >
               <FaSatelliteDish />
+            </button>
+          </Tooltip>
+
+          {/**Boton JSON */}
+          <Tooltip
+            title={
+              <div>
+                <Typography fontWeight="bold" fontSize={15}>
+                  JSON:
+                </Typography>
+                <Typography fontSize={12}>
+                  Visualiza o exporta los datos en formato JSON relacionados con esta figura.
+                </Typography>
+              </div>
+            }
+            arrow
+            placement="top"
+          >
+            <button
+              onClick={handleJsonClick}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "white", fontSize: "24px", marginTop: "15px" }}
+            >
+              <FaCode />
             </button>
           </Tooltip>
 
